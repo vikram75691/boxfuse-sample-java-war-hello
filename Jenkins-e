@@ -1,36 +1,35 @@
 pipeline {
-      agent any
-      
-      stages{
-            stage("GIT checkout"){
-            steps{
-                 git 'https://github.com/RAJANI9/boxfuse-sample-java-war-hello.git'
-              }
+    agent any
+
+    stages {
+        stage('SourceCheckout') {
+            steps {
+                git 'https://github.com/aiworklabs/boxfuse-sample-java-war-hello.git'
             }
-            stage("build"){
-                  steps{
-                       sh "mvn clean package"
-                       sh "mv target/*.war target/boxfuse-sample-java-war-hello.war"
-                      }
-                       
+        }
+        
+        
+        stage('Build') {
+            steps {
+                sh "mvn clean package"
+                sh "mv target/*.war  target/boxfuse-sample-java-war-hello.war"
             }
-             stage("depoly"){
-                  steps{
-                     
-                       
-                       sshagent(['ec2-user']) {
-                       
-                       sh """
-                            scp -o StrictHostKeyChecking=no  target/boxfuse-sample-java-war-hello.war ec2-user@18.191.134.13:/home/ec2-user/apache-tomcat-9.0.73/webapps/
+        }
+        
+        stage('Deploy') {
+            steps {
+                sshagent(['deploy']) {
+                    
+                      sh """
+                            scp -o StrictHostKeyChecking=no  target/boxfuse-sample-java-war-hello.war ubuntu@13.232.207.1:/home/ubuntu/apache-tomcat-9.0.83/webapps
                             
-                            ssh ec2-user@18.191.134.13 /home/ec2-user/apache-tomcat-9.0.73/bin/shutdown.sh
-                            ssh ec2-user@18.191.134.13 /home/ec2-user/apache-tomcat-9.0.73/bin/startup.sh
+                            ssh ubuntu@13.232.207.1 "sudo /home/ubuntu/apache-tomcat-9.0.83/bin/shutdown.sh"
+                            ssh ubuntu@13.232.207.1 "sudo /home/ubuntu/apache-tomcat-9.0.83/bin/startup.sh"
                             
                           """
     
-}
-                      
-                       }
+                        }
             }
-       }
-  }     
+        }
+    }
+}
