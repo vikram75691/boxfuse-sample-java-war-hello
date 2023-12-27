@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("GIT checkout") {
             steps {
-                git 'https://github.com/RAJANI9/boxfuse-sample-java-war-hello.git'
+                git branch: 'master', url: 'https://github.com/Naresh-IT-9AM/rajinikanth-devops-kitchen.git'
             }
         }
         
@@ -20,16 +20,20 @@ pipeline {
                 script {
                     sshagent(['NewTomcat']) {
                         def remoteDir = '/home/ubuntu/apache-tomcat-9.0.84/webapps/'
+                        def remoteTempDir = '/tmp/'
                         def remoteShutdownScript = '/home/ubuntu/apache-tomcat-9.0.84/bin/shutdown.sh'
                         def remoteStartupScript = '/home/ubuntu/apache-tomcat-9.0.84/bin/startup.sh'
                         def localWarFile = 'target/boxfuse-sample-java-war-hello.war'
 
-                        // Copy the WAR file to the remote server
-                        sh "scp -o StrictHostKeyChecking=no ${localWarFile} ubuntu@13.233.107.78:${remoteDir}"
+                        // Copy the WAR file to a temporary directory on the remote server
+                        sh "scp -o StrictHostKeyChecking=no ${localWarFile} ubuntu@13.233.132.109:${remoteTempDir}"
+
+                        // Move the WAR file from the temporary directory to the final directory using sudo
+                        sh "ssh ubuntu@13.233.132.109 'sudo mv ${remoteTempDir}boxfuse-sample-java-war-hello.war ${remoteDir}'"
 
                         // Shutdown and then startup Tomcat on the remote server
-                        sh "ssh ubuntu@13.233.107.78 sudo  ${remoteShutdownScript}"
-                        sh "ssh ubuntu@13.233.107.78 sudo  ${remoteStartupScript}"
+                        sh "ssh ubuntu@13.233.132.109 'sudo ${remoteShutdownScript}'"
+                        sh "ssh ubuntu@13.233.132.109 'sudo ${remoteStartupScript}'"
                     }
                 }
             }
@@ -41,7 +45,7 @@ pipeline {
             echo 'Deployment successful!'
         }
         failure {
-            echo 'Deployment failed.'
+            echo 'Deployment failed. Check logs and server settings.'
         }
     }
 }
