@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'fe/dev', description: 'Specify the branch name to deploy')
+    }
+    stages {
+        stage("GIT checkout") {
+            steps {
+                script {
+                    // Checkout the specified branch
+                    def branchName = params.BRANCH_NAME
+                    checkout([$class: 'GitSCM', branches: [[name: branchName]], userRemoteConfigs: [[url: 'https://github.com/aiworklabs/boxfuse-sample-java-war-hello.git']]])
+                }
+            }
+        }
+        stage("Build") {
+            steps {
+                sh "mvn clean package"
+                sh "mv target/hello-1.0.war target/boxfuse-sample-java-war-hello.war"
+            }
+        }
+        stage("Deploy to Tomcat") {
+            when {
+                expression { params.BRANCH_NAME == 'fe/dev' || params.BRANCH_NAME == 'fe/qa' }
+            }
+            steps {
+                script {
+                    def tomcatURL = 'http://65.0.92.89:8080/manager/text'
+                    def username = 'devops'
+                    def password = 'devops'
+                    def contextPath = '/boxfuse-sample-java-war-hello'  // Change this to your desired context path
+                    def warFileName = 'target/boxfuse-sample-java-war-hello.war'
+
+                    // Deploy the WAR file using curl
+                    sh """
+                        curl -v -u ${username}:${password} --upload-file ${warFileName} ${tomcatURL}/deploy?path=${contextPath}&update=true
+                    """
+                }
+            }
+        }
+    }
+}
