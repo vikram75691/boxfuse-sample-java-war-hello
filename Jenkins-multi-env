@@ -8,8 +8,8 @@ pipeline {
 
     // Define environment variables
     environment {
-        DEV_SERVER_IP = '13.233.107.78'
-        QA_SERVER_IP = '13.233.132.109'
+        DEV_SERVER_IP = '13.232.197.1'
+        QA_SERVER_IP = '13.233.198.62'
         TOMCAT_DIR = '/home/ubuntu/apache-tomcat-9.0.84'
         WAR_FILE = 'target/boxfuse-sample-java-war-hello.war'
         // Initialized as empty, to be set in the script block
