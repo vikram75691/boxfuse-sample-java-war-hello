@@ -22,7 +22,7 @@
             <id>central</id>
             <url>https://repo.maven.apache.org/maven2</url>
         </repository>
-        <!-- Add any additional repositories, including Artifactory, if needed -->
+        <!-- Add any additional repositories here -->
     </repositories>
 
     <build>
@@ -31,31 +31,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.10.0.2594</version>
-            </plugin>
-            <plugin>
-                <groupId>org.jfrog.buildinfo</groupId>
-                <artifactId>artifactory-maven-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <id>build-info</id>
-                        <goals>
-                            <goal>publish</goal>
-                        </goals>
-                        <configuration>
-                            <deployProperties>
-                                <deploy.build.name>${project.name}</deploy.build.name>
-                                <deploy.build.number>${project.version}</deploy.build.number>
-                            </deployProperties>
-                            <artifactory>
-                                <deploy>
-                                    <deployArtifacts>true</deployArtifacts>
-                                </deploy>
-                                <publishBuildInfo>true</publishBuildInfo>
-                            </artifactory>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
