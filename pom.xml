@@ -51,4 +51,16 @@
             </plugin>
         </plugins>
     </build>
+    
+    <!-- Add distributionManagement section for deploying artifacts -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexusRepo</id>
+            <url>http://18.61.48.229:8081/repository/sample-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexusRepo</id>
+            <url>http://18.61.48.229:8081/repository/sample-releases/</url>
+        </repository>
+    </distributionManagement>
 </project>
