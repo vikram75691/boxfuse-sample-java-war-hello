@@ -25,6 +25,16 @@
         <!-- Add any additional repositories here -->
     </repositories>
 
+    <dependencies>
+        <!-- Servlet API dependency -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -51,8 +61,8 @@
             </plugin>
         </plugins>
     </build>
-    
-    <!-- Add distributionManagement section for deploying artifacts -->
+
+    <!-- Distribution Management for deploying artifacts -->
     <distributionManagement>
         <snapshotRepository>
             <id>nexusRepo</id>
