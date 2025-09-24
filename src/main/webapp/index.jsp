@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rajinikanth-BlickIT Store</title>
+  <title>Rajinikanth-Heart list</title>
   <style>
     body {
       margin: 0;
@@ -107,21 +107,21 @@
   <div class="products">
     <!-- Product 1 -->
     <div class="product">
-      <img src="https://i.pinimg.com/originals/66/19/7c/66197cd4539b91e4b2ce243ff0f6acbe.jpg" alt="Actress 1">
+      <img src="https://i.pinimg.com/originals/66/19/7c/66197cd4539b91e4b2ce243ff0f6acbe.jpg" alt="South Indian Actress">
       <h3>South Indian Actress</h3>
       <p>Celebrity collection item...</p>
       <a href="#" class="add-to-cart">Add to Cart</a>
     </div>
     <!-- Product 2 -->
     <div class="product">
-      <img src="https://www.beyoung.in/api/cache/catalog/products/new_collection/mrunal_thakur_brown_oversized_tshirt_base_05_10_2022_400x533.jpg" alt="Actress 2">
+      <img src="https://www.beyoung.in/api/cache/catalog/products/new_collection/mrunal_thakur_brown_oversized_tshirt_base_05_10_2022_400x533.jpg" alt="Mrunal Thakur">
       <h3>Mrunal Thakur</h3>
       <p>Exclusive fashion product...</p>
       <a href="#" class="add-to-cart">Add to Cart</a>
     </div>
     <!-- Product 3 -->
     <div class="product">
-      <img src="https://i.pinimg.com/736x/4d/24/fc/4d24fc2162cf7f38b4f1c1c09dbef83e.jpg" alt="Actress 3">
+      <img src="https://i.pinimg.com/736x/4d/24/fc/4d24fc2162cf7f38b4f1c1c09dbef83e.jpg" alt="Heroine Collection">
       <h3>Heroine Collection</h3>
       <p>Special category...</p>
       <a href="#" class="add-to-cart">Add to Cart</a>
